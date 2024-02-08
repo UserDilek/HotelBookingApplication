@@ -1,5 +1,5 @@
 #root {
-  max-width: 1280px;
+  
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
@@ -39,4 +39,177 @@
 
 .read-the-docs {
   color: #888;
+}
+
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+img{
+  max-width: 100%;
+}
+
+.primary-color{
+  background-color: #88BDBC;
+}
+
+*:focus{
+  outline: none;
+}
+
+a{
+  text-decoration: none;
+}
+
+body{
+  font-size: 16px;
+  font-family: 'Open Sans', sans-serif;
+}
+
+
+/** login component css **/
+
+.login-main{
+  display: flex;
+  flex-wrap: wrap;
+  min-height: 100vh;
+}
+
+.login-main .image-block{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  justify-content: center;
+  width: 60%;
+}
+
+.login-main .image-block img{
+  width: 75%;
+}
+
+.login-main .form-block{
+  width: 40%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-image: url(../src/assets/images/Bench.png);
+  background-repeat: no-repeat;
+  background-size: 175px;
+  background-position: right bottom;
+  padding: 25px;
+}
+
+.login-main .form-block .logo{
+  display: inline-block;
+  max-width: 250px;
+}
+
+.input-block {
+  border:1px solid #88BDBC;
+  border-radius: 50px;
+  padding: 7px 12px;
+  display: flex;
+  gap: 10px;
+}
+
+.input-block .icon{
+  display: inline-block;
+  width:32px;
+}
+
+.login-main input{
+  background-color: transparent;
+  border: 0;
+}
+
+.field-block{
+  display: flex;
+  gap: 15px;
+}
+
+.login-main .btn{
+  width: 100%;
+  background-color: #88BDBC;
+  text-align: center;
+  border:1px solid #88BDBC;
+  border-radius: 50px;
+  padding: 14px;
+  color: white;
+  font-weight: 600;
+  font-size: 24px;
+  cursor: pointer;
+  transition: 0.4s;
+}
+
+.login-main .btn:hover{
+  background-color: transparent;
+  border: 1px solid #88BDBC;
+  color: #88BDBC;
+}
+
+.login-main form{
+  display:flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.login-main .tag{
+  margin-bottom: 30px;
+}
+
+.login-main .btm{
+  margin-top: 30px;
+}
+
+.login-main .btm a{
+  font-weight: 600;
+  color: #000;
+}
+
+.mb-d{
+  display: none;
+  padding: 40px 0;
+}
+
+
+/** media css **/
+
+@media screen and (max-width: 767px) {
+  .login-main{
+    flex-direction: column;
+  }
+  .login-main .image-block{
+    width:100%;
+  }
+  .login-main .image-block .ill-img{
+    display: none;
+  }
+  .mb-d{
+    display: block;
+    text-align: center;
+  }
+  .login-main .form-block{
+    width: 100%;
+    padding: 60px 25px;
+  }
+  .login-main .form-block .logo,.login-main .form-block .tag{
+    display: none;
+  }
+  .field-block{
+    flex-direction: column;
+  }
+  .login-main form{
+    gap: 15px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .login-main form {
+    width: 100%;
+  }
 }
