@@ -9,7 +9,7 @@ type ToastInputs = {
 const Toast = ({message,type,onClose}:ToastInputs) =>{
     
     useEffect(()=> {   
-        const timer = setTimeout(()=>{onClose()  }, 5000);
+        const timer = setTimeout(()=>{onClose()  }, 2000);
         return () => clearTimeout(timer);
     },[onClose])
 
