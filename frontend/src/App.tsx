@@ -11,7 +11,6 @@ import {
 import './App.css';
 import Layout from './layouts/Layout';
 import Register from './pages/Register'  ;
-import Dilek from './pages/Dilek'  ;
 import Home from './pages/Home'  ;
 import SignIn from './pages/SignIn'  ;
 
@@ -25,7 +24,6 @@ const App = () =>{
       <Route path='/search' element={<>Search Page</>}/>
       <Route path='/signin' element={<SignIn></SignIn>}/>
       <Route path='/register' element={<Register></Register>}/>
-      <Route path='/dilek' element={<Dilek></Dilek>}/>
       <Route path='*' element={<Navigate to="/"/>}/>
       </Routes>
 
