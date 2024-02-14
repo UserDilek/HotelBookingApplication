@@ -5,15 +5,17 @@
 
 interface Props {
   children: React.ReactNode;
+  showHeroSection?: Boolean;
+  showSearchBar?: Boolean;
 }
 
-const Layout = ({ children }: Props) => {
+const Layout = ({ showHeroSection = false, showSearchBar = false, children }: Props) => {
   return (
     <div className="flex flex-col min-h-screen">
       <div className="">
       <Header></Header>
-      <Hero></Hero>
-      <SearchBar></SearchBar>
+      {showHeroSection && <Hero></Hero>}
+      {showSearchBar && <SearchBar></SearchBar>}
       </div>
       <div className="">{children}</div>
       <Footer></Footer>
