@@ -96,7 +96,7 @@ body{
 .login-main .image-block{
   display: flex;
   flex-wrap: wrap;
-  align-items: end;
+  align-items: flex-end;
   justify-content: center;
   width: 60%;
 }

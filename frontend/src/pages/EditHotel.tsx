@@ -1,13 +1,13 @@
 import HotelForm from "../components/HotelForm";
 
-const CreateHotel = () => {
+const EditHotel = () => {
     const handleSubmit = (data:any) => {
         console.log(data);
     };
 
     return (
-        <HotelForm label="Add New Hotel" handleFormSubmit={handleSubmit} />
+        <HotelForm label="Edit Hotel" handleFormSubmit={handleSubmit} />
     )
 }
 
-export default CreateHotel;
+export default EditHotel;

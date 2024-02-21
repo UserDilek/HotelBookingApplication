@@ -15,6 +15,8 @@ import Home from './pages/Home'  ;
 import SignIn from './pages/SignIn'  ;
 import SearchPage from './pages/SearchPage';
 import CreateHotel from './pages/CreateHotel';
+import MyHotels from './pages/MyHotels';
+import EditHotel from './pages/EditHotel';
 
 
 
@@ -30,6 +32,8 @@ const App = () =>{
         </Layout>}/>
       <Route path='/search' element={<Layout><SearchPage /></Layout>}/>
       <Route path='/create-hotel' element={<Layout><CreateHotel /></Layout>}/>
+      <Route path='/edit-hotel' element={<Layout><EditHotel /></Layout>}/>
+      <Route path='/my-hotels' element={<Layout><MyHotels /></Layout>}/>
       <Route path='/signin' element={<SignIn></SignIn>}/>
       <Route path='/register' element={<Register></Register>}/>
       <Route path='*' element={<Navigate to="/"/>}/>
