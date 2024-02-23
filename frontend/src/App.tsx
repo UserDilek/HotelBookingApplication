@@ -13,7 +13,7 @@ import Layout from './layouts/Layout';
 import Register from './pages/Register'  ;
 import Home from './pages/Home'  ;
 import SignIn from './pages/SignIn'  ;
-
+import Hotelview from './pages/HotelViewPage';
 
 
 const App = () =>{
@@ -24,6 +24,8 @@ const App = () =>{
       <Route path='/search' element={<>Search Page</>}/>
       <Route path='/signin' element={<SignIn></SignIn>}/>
       <Route path='/register' element={<Register></Register>}/>
+      <Route path='/hotelview' element={<Hotelview/>}/>
+
       <Route path='*' element={<Navigate to="/"/>}/>
       </Routes>
 
