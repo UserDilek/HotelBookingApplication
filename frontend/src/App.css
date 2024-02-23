@@ -96,7 +96,7 @@ body{
 .login-main .image-block{
   display: flex;
   flex-wrap: wrap;
-  align-items: end;
+  align-items: flex-end;
   justify-content: center;
   width: 60%;
 }
@@ -145,6 +145,18 @@ body{
 .field-block{
   display: flex;
   gap: 15px;
+}
+
+.btn{
+  width: 100%;
+  background-color: #88BDBC !important;
+  text-align: center;
+  border:1px solid #88BDBC;
+  border-radius: 50px;
+  padding: 10px;
+  color: white;
+  cursor: pointer;
+  transition: 0.4s;
 }
 
 .login-main .btn{
