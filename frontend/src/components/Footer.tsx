@@ -2,6 +2,7 @@ import { BiLogoFacebookCircle } from "react-icons/bi";
 import { BiLogoInstagramAlt } from "react-icons/bi";
 import { BiLogoTwitter } from "react-icons/bi";
 import { BiLogoYoutube } from "react-icons/bi";
+
 const Footer = () => {
   const style = { color: "white", fontSize: "2.5em" }
     return (
