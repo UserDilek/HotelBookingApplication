@@ -1,5 +1,5 @@
 import HotelForm from "../components/HotelForm";
-// import axios from 'axios';
+import axios from 'axios';
 
 const EditHotel = () => {
     const handleSubmit = (data:any) => {
