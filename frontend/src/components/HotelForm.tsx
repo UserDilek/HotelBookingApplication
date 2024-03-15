@@ -35,9 +35,10 @@ const facilitiyOptions = [
 
 interface HotelFormInterface {
     label: string,
-    handleFormSubmit: (data:any) => void
+    handleFormSubmit: (data:any) => void;
+    handleDelete: (hotelId:string) => void;
 }
-const HotelForm = ({ label, handleFormSubmit }: HotelFormInterface) => {
+const HotelForm = ({ label, handleFormSubmit, handleDelete }: HotelFormInterface) => {
     const { register, handleSubmit, formState: { errors }, } = useForm<HotelFormData>();
     const [type, setType] = useState<string[]>([]);
     const [facilities, setFacilities] = useState<string[]>([]);
@@ -211,6 +212,7 @@ const HotelForm = ({ label, handleFormSubmit }: HotelFormInterface) => {
 
 
                 <button type="submit" className="btn">Submit</button>
+                <button type="button" className="btn" style={{marginTop: '10px'}} onClick={() => handleDelete('123456')}>Delete</button>
             </form>
         </div >
     )

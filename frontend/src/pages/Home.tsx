@@ -8,7 +8,7 @@ const Home = () => {
   const secondHotels = ["hotel5.jpg","hotel6.jpg","hotel7.jpg","hotel8.jpg","hotel3.jpg","hotel4.jpg"];
   const firstHotelMaps = firstHotels.map((hotelName, index) => {
     return (
-        <Link  to={"/"}   className="relative cursor-pointer overflow-hidden rounded-md" >
+        <Link  to={"/hotelview"}   className="relative cursor-pointer overflow-hidden rounded-md" >
         <div className="h-[300px]">
     <img
       src={hotelName}
@@ -27,7 +27,7 @@ const Home = () => {
 
   const secondHotelMaps = secondHotels.map((hotelName, index) => {
     return (
-        <Link  to={"/"}   className="relative cursor-pointer overflow-hidden rounded-md" >
+        <Link  to={"/hotelview"}   className="relative cursor-pointer overflow-hidden rounded-md" >
         <div className="h-[300px]">
     <img
       src={hotelName}
