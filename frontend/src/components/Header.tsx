@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import { useAppContext } from "../contexts/AppContext"; 
+import { useAppContext } from "../contexts/AppContext";
 import SignOutButton from "../components/SignOutButton";  
-
+ 
 const Header = () => {
    const {isLogged} = useAppContext();
     return (
@@ -11,24 +11,23 @@ const Header = () => {
           <Link to="/"><img className="w-70 h-70" src="../src/assets/images/white-logo.png"></img></Link>
         </span>
         <span className="flex ">
-          { isLogged ? ( <>
-                       <Link to="/"  className="flex bg-mainColor items-center text-white px-2 font-bold hover:text-black ">My Bookings</Link>
-                       <Link to="/"  className="flex bg-mainColor items-center text-white px-2 font-bold hover:text-black">My Hotels</Link>
+           <>
+                       <Link to="/my-bookings"  className="flex bg-mainColor items-center text-white px-2 font-bold hover:text-black ">My Bookings</Link>
+                       <Link to="/my-hotels"  className="flex bg-mainColor items-center text-white px-2 font-bold hover:text-black">My Hotels</Link>
                        <Link to="/signout"  className="flex bg-mainColor  items-center text-white px-2 font-bold hover:text-black"><button><SignOutButton></SignOutButton></button></Link>
-                       </>)
-                    :
-                    (
+                       </>
+                  
                       <Link
                       to="/signin"
                       className="flex bg-mainColor items-center text-white px-2 font-bold hover:text-black "
                     >
                       SignIn
                     </Link>
-                    )}
+                   
         </span>
       </div>
     </div>
     );
   };
-  
+ 
   export default Header;

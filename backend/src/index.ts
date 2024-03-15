@@ -3,6 +3,7 @@ import cors from 'cors';
 import "dotenv/config";
 import mongoose from 'mongoose';
 import userRoutes from './routes/user';
+import hotelRoutes from './routes/myhotels';
 import authRoutes from './routes/auth';
 import cookieParser from 'cookie-parser';
 
@@ -17,10 +18,12 @@ app.use(cors({
     origin:process.env.FRONTEND_URL ,
     credentials:true
 }));
+// app.use(cors());
 
 
 app.use("/api/auth" ,authRoutes);
 app.use("/api/users" ,userRoutes);
+app.use("/api/my-hotels" ,hotelRoutes);
 
 
 app.listen(7000, ()=>{

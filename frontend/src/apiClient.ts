@@ -1,6 +1,22 @@
 import {RegisterFormData} from './pages/Register';
 import {SignInFormData} from './pages/SignIn';
-
+import {
+  HotelSearchResponse,
+  HotelType,
+  PaymentIntentResponse,
+  UserType,
+} from "../../backend/src/shared/types";
+ 
+export const fetchCurrentUser = async (): Promise<UserType> => {
+  const response = await fetch(`http://localhost:7000/api/users/me`, {
+    credentials: "include",
+  });
+  if (!response.ok) {
+    throw new Error("Error fetching user");
+  }
+  return response.json();
+};
+ 
 export const register = async (formData:RegisterFormData) =>{
     const response = await fetch('http://localhost:7000/api/users/register', {
         method: 'POST',
@@ -12,20 +28,20 @@ export const register = async (formData:RegisterFormData) =>{
     })
     return response.json()  
 }
-
-export const validateToken = async () =>{   
+ 
+export const validateToken = async () =>{  
    const response = await fetch('http://localhost:7000/api/auth/validateToken',{
-     credentials:"include", 
-
-   });   
+     credentials:"include",
+ 
+   });  
    
-   if(!response.ok) {   
-    throw new Error("Token is invalid.");   
+   if(!response.ok) {  
+    throw new Error("Token is invalid.");  
    }
-
+ 
    return response.json();
 }
-
+ 
 export const signIn = async (formData: SignInFormData) => {
     const response = await fetch("http://localhost:7000/api/auth/login", {
       method: "POST",
@@ -35,22 +51,203 @@ export const signIn = async (formData: SignInFormData) => {
       },
       body: JSON.stringify(formData),
     });
-  
+ 
     const body = await response.json();
     if (!response.ok) {
       throw new Error(body.message);
     }
     return body;
   };
-
+ 
   export const signOut = async () => {
     const response = await fetch("http://localhost:7000/api/auth/logout", {
       credentials: "include",
       method: "POST",
     });
-  
+ 
     if (!response.ok) {
       throw new Error("Error during sign out");
     }
   };
-  
+ 
+  export const createMyHotel = async (hotelFormData: FormData) => {
+   
+    console.log("api client ın içerisine girdim");
+    for (const pair of hotelFormData.entries()) {
+      console.log(pair[0], pair[1]);
+    }
+    const response = await fetch("http://localhost:7000/api/my-hotels", {
+      method: "POST",
+      credentials: "include",
+      body: hotelFormData,
+    });
+ 
+    if (!response.ok) {
+      throw new Error("Failed to add hotel");
+    }
+ 
+    return response.json();
+  };
+ 
+ 
+  export const fetchMyHotels = async (): Promise<HotelType[]> => {
+    const response = await fetch("http://localhost:7000/api/my-hotels", {
+      credentials: "include",
+    });
+ 
+    if (!response.ok) {
+      throw new Error("Error fetching hotels");
+    }
+ 
+    return response.json();
+  };
+ 
+  export const fetchMyHotelById = async (hotelId: string): Promise<HotelType> => {
+    console.log("hoteli almaya geldi mi");
+    const response = await fetch(`http://localhost:7000/api/my-hotels/${hotelId}` , {
+      credentials: "include",
+    });
+ 
+    if (!response.ok) {
+      throw new Error("Error fetching Hotels");
+    }
+ 
+    return response.json();
+  };
+ 
+  export const updateMyHotelById = async (hotelFormData: FormData) => {
+    const response = await fetch(
+      `http://localhost:7000/api/my-hotels/${hotelFormData.get("hotelId")}`,
+      {
+        method: "PUT",
+        body: hotelFormData,
+        credentials: "include",
+      }
+    );
+ 
+    if (!response.ok) {
+      throw new Error("Failed to update Hotel");
+    }
+ 
+    return response.json();
+  };
+ 
+  export const deleteMyHotelById = async (hotelFormData: FormData) => {
+ 
+    console.log("DELETE APİSİNE GELDİ" );
+    const response = await fetch(
+      `http://localhost:7000/api/my-hotels/${hotelFormData.get("hotelId")}`,
+      {
+        method: "DELETE",
+        body: hotelFormData,
+        credentials: "include",
+      }
+    );
+ 
+ 
+    if (!response.ok) {
+      throw new Error("Failed to delete Hotel");
+    }
+ 
+    return response.json();
+  };
+ 
+  export const fetchHotels = async (): Promise<HotelType[]> => {
+    const response = await fetch("http://localhost:7000/api/hotels");
+    if (!response.ok) {
+      throw new Error("Error fetching hotels");
+    }
+    return response.json();
+  };
+ 
+  export const fetchHotelById = async (hotelId: string): Promise<HotelType> => {
+    const response = await fetch(`http://localhost:7000/api/hotels/${hotelId}`);
+    if (!response.ok) {
+      throw new Error("Error fetching Hotels");
+    }
+ 
+    return response.json();
+  };
+ 
+ 
+  export const createPaymentIntent = async (
+    hotelId: string,
+    numberOfNights: string
+  ): Promise<PaymentIntentResponse> => {
+    const response = await fetch(
+      `http://localhost:7000/api/hotels/${hotelId}/bookings/payment-intent`,
+      {
+        credentials: "include",
+        method: "POST",
+        body: JSON.stringify({ numberOfNights }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+ 
+    if (!response.ok) {
+      throw new Error("Error fetching payment intent");
+    }
+ 
+    return response.json();
+  };
+ 
+  export const fetchMyBookings = async (): Promise<HotelType[]> => {
+    const response = await fetch(`http://localhost:7000/api/my-bookings`, {
+      credentials: "include",
+    });
+ 
+    if (!response.ok) {
+      throw new Error("Unable to fetch bookings");
+    }
+ 
+    return response.json();
+  };
+ 
+  export type SearchParams = {
+    destination?: string;
+    checkIn?: string;
+    checkOut?: string;
+    adultCount?: string;
+    childCount?: string;
+    page?: string;
+    facilities?: string[];
+    types?: string[];
+    stars?: string[];
+    maxPrice?: string;
+    sortOption?: string;
+  };
+ 
+ 
+  export const searchHotels = async (
+    searchParams: SearchParams
+  ): Promise<HotelSearchResponse> => {
+    const queryParams = new URLSearchParams();
+    queryParams.append("destination", searchParams.destination || "");
+    queryParams.append("checkIn", searchParams.checkIn || "");
+    queryParams.append("checkOut", searchParams.checkOut || "");
+    queryParams.append("adultCount", searchParams.adultCount || "");
+    queryParams.append("childCount", searchParams.childCount || "");
+    queryParams.append("page", searchParams.page || "");
+ 
+    queryParams.append("maxPrice", searchParams.maxPrice || "");
+    queryParams.append("sortOption", searchParams.sortOption || "");
+ 
+    searchParams.facilities?.forEach((facility) =>
+      queryParams.append("facilities", facility)
+    );
+ 
+    searchParams.types?.forEach((type) => queryParams.append("types", type));
+    searchParams.stars?.forEach((star) => queryParams.append("stars", star));
+ 
+    const response = await fetch(
+      `http://localhost:7000/api/hotels/search?${queryParams}`
+    );
+ 
+    if (!response.ok) {
+      throw new Error("Error fetching hotels");
+    }
+ 
+    return response.json();
+  };
