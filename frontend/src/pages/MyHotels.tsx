@@ -1,67 +1,82 @@
-import { GrMapLocation } from "react-icons/gr";
-import { CiDollar } from "react-icons/ci";
-import { IoBedOutline } from "react-icons/io5";
-import { FaStar } from "react-icons/fa";
-import { HiOutlineWallet } from "react-icons/hi2";
-import { useNavigate } from "react-router-dom";
-
-const data = [
-    { name: "name", description: "description", location: "location", budget: 500, price: "50$", adultCount: 2, childCount: 5, rating: 4.5 },
-    { name: "name", description: "description", location: "location", budget: 500, price: "50$", adultCount: 2, childCount: 5, rating: 4.5 },
-    { name: "name", description: "description", location: "location", budget: 500, price: "50$", adultCount: 2, childCount: 5, rating: 4.5 },
-    { name: "name", description: "description", location: "location", budget: 500, price: "50$", adultCount: 2, childCount: 5, rating: 4.5 },
-    { name: "name", description: "description", location: "location", budget: 500, price: "50$", adultCount: 2, childCount: 5, rating: 4.5 },
-]
+import { useQuery } from "react-query";
+import { Link } from "react-router-dom";
+import * as apiClient from "../apiClient";
+import { BsBuilding, BsMap } from "react-icons/bs";
+import { BiHotel, BiMoney, BiStar } from "react-icons/bi";
 
 const MyHotels = () => {
-    const navigate = useNavigate();
-
-    const addHotelHandler = () => {
-        navigate("/create-hotel");
+  const { data: hotelData } = useQuery(
+    "fetchMyHotels",
+    apiClient.fetchMyHotels,
+    {
+      onError: () => {},
     }
+  );
 
-    return (
-        <div className="p-5 w-full text-start">
-            <div className="flex items-center justify-between">
+  if (!hotelData) {
+    return <span>No Hotels found</span>;
+  }
+
+  return (
+    <div className="p-5 w-full text-start">
+   
+      
+        <div className="flex items-center justify-between mt-10 mb-10">
                 <h1 className="text-4xl mb-5 text-[#88BDBC] mt-5">My Hotels</h1>
                 <div>
-                    <button onClick={addHotelHandler} className="btn">Add Hotel</button>
+                  
+                    <Link to="/add-hotel" ><button className="btn pr-10 pl-10">Add Hotel</button></Link>  
                 </div>
             </div>
+    
 
-            <div>
-                {data.map((item, index) =>
-                    <HotelCard key={index} hotel={item} />
-                )}
+ 
+      <div className="grid grid-cols-1 gap-8">
+        {hotelData.map((hotel) => (
+          <div
+            data-testid="hotel-card"
+            className="flex flex-col justify-between border border-slate-300 rounded-lg p-8 gap-5"
+          >
+            <h2 className="text-2xl font-bold">{hotel.name}</h2>
+            <div className="whitespace-pre-line">{hotel.description}</div>
+            <div className="grid grid-cols-5 gap-2">
+              <div className="border border-slate-300 rounded-sm p-3 flex items-center">
+                <BsMap className="mr-1" />
+                {hotel.city}, {hotel.country}
+              </div>
+              <div className="border border-slate-300 rounded-sm p-3 flex items-center">
+                <BsBuilding className="mr-1" />
+                {hotel.type}
+              </div>
+              <div className="border border-slate-300 rounded-sm p-3 flex items-center">
+                <BiMoney className="mr-1" />${hotel.pricePerNight} per night
+              </div>
+              <div className="border border-slate-300 rounded-sm p-3 flex items-center">
+                <BiHotel className="mr-1" />
+                {hotel.adultCount} adults, {hotel.childCount} children
+              </div>
+              <div className="border border-slate-300 rounded-sm p-3 flex items-center">
+                <BiStar className="mr-1" />
+                {hotel.starRating} Star Rating
+              </div>
             </div>
-        </div>
-    )
-}
+            <span className="flex justify-end">
+              <Link
+                to={`/edit-hotel/${hotel._id}`}
+                className=""
+              >
+              <div className="flex justify-end">
+              <button className="btn mt-3 w-auto">View Details</button>
+           </div> 
+              </Link>
 
-const HotelCard = ({ hotel }: { hotel: any }) => {
-    const attributes = [
-        { icon: <GrMapLocation />, detail: hotel.location },
-        { icon: <HiOutlineWallet />, detail: `${hotel.budget}$ Budget` },
-        { icon: <CiDollar />, detail: `${hotel.price} per night` },
-        { icon: <IoBedOutline />, detail: `${hotel.adultCount} Adults, ${hotel.childCount} Children` },
-        { icon: <FaStar />, detail: hotel.rating }
-    ]
-    return (
-        <div className="shadow p-4 rounded mb-5">
-            <h2 className="text-xl font-semibold">{hotel.name}</h2>
-            <p>{hotel.description}</p>
-            <div className="flex flex-wrap items-center gap-5 mt-3">
-                {attributes.map((item, index) =>
-                    <div key={index} className="flex items-center gap-2 rounded-md shadow-sm p-3 border-2">
-                        {item.icon}
-                        {item.detail}
-                    </div>
-                )}
-            </div>
-            <div className="flex justify-end">
-            <button className="btn mt-3 w-auto">View Details</button>
-            </div>
-        </div>
-    )
-}
+              
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
 export default MyHotels;

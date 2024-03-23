@@ -13,7 +13,7 @@ const Header = () => {
         <span className="flex ">
           { isLogged ? ( <>
                        <Link to="/"  className="flex bg-mainColor items-center text-white px-2 font-bold hover:text-black ">My Bookings</Link>
-                       <Link to="/"  className="flex bg-mainColor items-center text-white px-2 font-bold hover:text-black">My Hotels</Link>
+                       <Link to="/my-hotels"  className="flex bg-mainColor items-center text-white px-2 font-bold hover:text-black">My Hotels</Link>
                        <Link to="/signout"  className="flex bg-mainColor  items-center text-white px-2 font-bold hover:text-black"><button><SignOutButton></SignOutButton></button></Link>
                        </>)
                     :

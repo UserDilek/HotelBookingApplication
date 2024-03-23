@@ -159,6 +159,18 @@ body{
   transition: 0.4s;
 }
 
+.btn-red{
+  width: 100%;
+  background-color:  red!important;
+  text-align: center;
+  border:1px solid #88BDBC;
+  border-radius: 50px;
+  padding: 10px;
+  color: white;
+  cursor: pointer;
+  transition: 0.4s;
+}
+
 .login-main .btn{
   width: 100%;
   background-color: #88BDBC;

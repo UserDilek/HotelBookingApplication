@@ -1,7 +1,3 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-
 import {
   BrowserRouter as Router,
   Route,
@@ -18,13 +14,16 @@ import SearchPage from './pages/SearchPage';
 import CreateHotel from './pages/CreateHotel';
 import MyHotels from './pages/MyHotels';
 import EditHotel from './pages/EditHotel';
-
+import { useAppContext } from "./contexts/AppContext";
 
 import Hotelview from './pages/HotelViewPage';
 
 
-
 const App = () =>{
+
+  const { isLogged } = useAppContext();
+  
+
   return (
     <Router>
       <Routes>
@@ -36,18 +35,27 @@ const App = () =>{
         </Layout>}/>
       <Route path='/search' element={<Layout><SearchPage /></Layout>}/>
       <Route path='/create-hotel' element={<Layout><CreateHotel /></Layout>}/>
+      
       <Route path='/edit-hotel' element={<Layout><EditHotel /></Layout>}/>
       <Route path='/my-hotels' element={<Layout><MyHotels /></Layout>}/>
       <Route path='/signin' element={<SignIn></SignIn>}/>
-      <Route path='/register' element={<Register></Register>}/>
-      <Route path='/hotelview' element={<Hotelview/>}/>
+      <Route path='/register' element={<Register></Register>}/>  
+      <Route path='/hotelview/:hotelId' element={<Hotelview/>}/>
 
-      <Route path='*' element={<Navigate to="/"/>}/>
+      <Route path="*" element={<Navigate to="/" />} />
+      
+      {isLogged && (
+          <>
+           <Route path='/add-hotel' element={<Layout><CreateHotel /></Layout>}/>
+           <Route path="/edit-hotel/:hotelId" element={<Layout><EditHotel /></Layout> } />
+           <Route path='/hotelview' element={<Hotelview/>}/>                                                        
+          </>
+        )}
+       
       </Routes>
-
     </Router>
    
-  )
-}
+  );
+};
 
 export default App;
