@@ -16,7 +16,7 @@ import MyHotels from './pages/MyHotels';
 import EditHotel from './pages/EditHotel';
 import { useAppContext } from "./contexts/AppContext";
 
-import Hotelview from './pages/HotelViewPage';
+import HotelView from './pages/HotelViewPage';
 
 
 const App = () =>{
@@ -40,7 +40,7 @@ const App = () =>{
       <Route path='/my-hotels' element={<Layout><MyHotels /></Layout>}/>
       <Route path='/signin' element={<SignIn></SignIn>}/>
       <Route path='/register' element={<Register></Register>}/>  
-      <Route path='/hotelview/:hotelId' element={<Hotelview/>}/>
+      <Route path='/hotelview/:hotelId' element={<HotelView/>}/>
 
       <Route path="*" element={<Navigate to="/" />} />
       
@@ -48,7 +48,7 @@ const App = () =>{
           <>
            <Route path='/add-hotel' element={<Layout><CreateHotel /></Layout>}/>
            <Route path="/edit-hotel/:hotelId" element={<Layout><EditHotel /></Layout> } />
-           <Route path='/hotelview' element={<Hotelview/>}/>                                                        
+           <Route path='/hotelview' element={<HotelView/>}/>                                                        
           </>
         )}
        

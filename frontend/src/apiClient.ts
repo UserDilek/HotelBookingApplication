@@ -49,7 +49,6 @@ export const createMyHotel = async (hotelFormData: FormData) => {
 };
   
 export const fetchMyHotelById = async (hotelId: string): Promise<HotelType> => {
-  console.log("hoteli almaya geldi mi");
   const response = await fetch(`http://localhost:7000/api/my-hotels/${hotelId}` , {
     credentials: "include",
     headers:{
@@ -80,6 +79,9 @@ export const updateMyHotelById = async (hotelFormData: FormData) => {
   
   return response.json();
 };
+
+
+
 
 export const deleteMyHotelById = async (hotelFormData: FormData) => {
   console.log("DELETE APİSİNE GELDİ" );

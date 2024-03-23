@@ -1,14 +1,36 @@
-    import '../styles.css'; // Assuming you have a CSS file for styling
-    import banner from '../assets/images/banner.jpg';
-    import guset from '../assets/images/guest.jpg';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
-// import SearchBar from '../components/SearchBar'
-    function Hotelview() {
+import '../styles.css'; 
+import banner from '../assets/images/banner.jpg';
+import guset from '../assets/images/guest.jpg';
+import { useQuery } from "react-query";
+import { useParams } from "react-router-dom";
+import * as apiClient from "./../apiClient";
+import { AiFillStar } from "react-icons/ai";
+import GuestInfoForm from "../forms/GuestInfoForm/GuestInfoForm";
+
+
+
+const HotelView = ()=>{
+
+    const { hotelId } = useParams();
+
+
+    const { data: hotel } = useQuery(
+      "fetchHotelById",
+      () => apiClient.fetchMyHotelById(hotelId || ""),
+      {
+        enabled: !!hotelId,
+      }
+    );
+    
+   
+    if (!hotel) {
+      return <></>;
+    }
+
     return (
         <div>
-            <Header/>
-            {/* <SearchBar/> */}
+            
+          
         <nav>
             <ul>
             <li>OVERVIEW</li>
@@ -22,32 +44,38 @@ import Footer from '../components/Footer';
             <li>POLICIES</li>
             </ul>
         </nav>
-
+    
         <div className="container">
             <img className="image" src={banner} alt="banner image" />
-            <div className="overlay-text">Oberoi Hotel</div>
+            <div className="overlay-text">{hotel.name}</div>
         </div>
-
+    
         <div className="map" style={{ marginTop: '20px' }}>
             <div className="rating">
             <div>
-                <h1 style={{ fontSize: '28px' }}>Oberoi Hotel</h1>
-                <p>Luxury Hotel in Kitchener</p>
-                <p>⭐⭐⭐⭐</p>
-                <p>8.2 Very Good</p>
+                <h1 style={{ fontSize: '28px' }}>{hotel.name}</h1>
+                <p> Hotel in {hotel.city}</p>
+                <div>
+        <span className="flex justify-center">
+          {Array.from({ length: hotel.starRating }).map(() => (
+            <AiFillStar className="fill-yellow-400 text-3xl" />
+          ))}
+        </span>
+        <h1 className="text-3xl font-bold">{hotel.name}</h1>
+      </div>
+               
+            
+                
                 <hr style={{ height: '2px', backgroundColor: 'black', margin: '10px' }} />
             </div>
             <div className="amenities">
                 <h3>Popular Amenities</h3>
                 <ul>
-                <li>Breakfast included</li>
-                <li>Pet-friendly</li>
-                <li>Parking available</li>
-                <li>Free Wifi</li>
-                <li>Laundry</li>
-                <li>Air Conditioning</li>
-                <li>House Keeping</li>
-                <li>24/7 Front Desk</li>
+                {hotel.facilities.map((facility) => (
+      
+           <li> {facility}</li>
+        ))}
+               
                 </ul>
             </div>
             </div>
@@ -58,21 +86,20 @@ import Footer from '../components/Footer';
                 width="450"
                 height="300"
                 style={{ border: 0 }}
-                allowFullScreen=""
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
             ></iframe>
             <p>16 cedarwood cres, Kitchener, ON N2C 2L4</p>
             </div>
         </div>
-
+    
         <hr style={{ height: '2px', backgroundColor: 'black', margin: '10px auto', width: '70%' }} />
-
+    
         <div className="guest">
             <h1>Guest Room</h1>
             <img className="guestRoom" src={guset} alt="Guest Room" />
         </div>
-
+    
         <div className="reservation" style={{ marginTop: '20px' }}>
             <div className="details">
             <h2 style={{ fontSize: '28px' }}>Luxury suite, 2 Double beds</h2>
@@ -102,43 +129,11 @@ import Footer from '../components/Footer';
             <hr style={{ height: '2px', backgroundColor: 'black', margin: '15px 0px', width: '45%' }} />
             </div>
             <div className="reservation-container">
-            <h1> $155 CAD </h1>
-            <div className="form-group1">
-                <div className="date-box">
-                <label htmlFor="check-in">Check-in:</label>
-                <input type="date" id="check-in" name="check-in" />
-                </div>
-                <div className="date-box1">
-                <label htmlFor="check-out">Check-out:</label>
-                <input type="date" id="check-out" name="check-out" />
-                </div>
-            </div>
-            <div className="form-group">
-                <label htmlFor="room-type">Room Type:</label>
-                <select id="room-type" name="room-type">
-                <option value="single">Single</option>
-                <option value="double">Double</option>
-                <option value="suite">Suite</option>
-                </select>
-            </div>
-            <input type="submit" value="Reserve" />
-            <div className="night">
-                <span>$155 CAD + 1 Night</span>
-                <span>$155 CAD</span>
-            </div>
-            <div className="night">
-                <span>Taxes 13%</span>
-                <span>$20.15 CAD</span>
-            </div>
-
-            <hr />
-            <div className="night">
-                <span>Total</span>
-                <span>$175.15 CAD</span>
-            </div>
+            <GuestInfoForm  pricePerNight={hotel.pricePerNight}
+            hotelId={hotel._id}/>
             </div>
         </div>
-
+    
         <hr style={{ height: '2px', backgroundColor: 'black', margin: '10px auto', width: '70%' }} />
         <div className="Accessibility">
             <div className="alist">
@@ -155,12 +150,12 @@ import Footer from '../components/Footer';
             <p>If you have requests for specific accessibility needs, please contact the property using the information on the reservation confirmation received after booking</p>
             </div>
         </div>
-
+    
         <hr className="aprop" style={{ height: '2px', backgroundColor: 'black', margin: '10px auto', width: '70%' }} />
         <div className="proprety">
             <h2 style={{ fontSize: '24px' }}>About property</h2>
         </div>
-
+    
         <hr style={{ height: '2px', backgroundColor: 'black', margin: '10px auto', width: '70%' }} />
         <div className="info">
             <h2 style={{ fontSize: '24px' }}>Important information</h2>
@@ -180,9 +175,11 @@ import Footer from '../components/Footer';
             <li>Please note that cultural norms and guest policies may differ by country and by property; the policies listed are provided by the property</li>
             </ul>
         </div>
-        <Footer/>
+        
         </div>
     );
-    }
+}
 
-    export default Hotelview
+
+
+export default HotelView;
