@@ -21,7 +21,6 @@ export type UserType = {
     starRating: number;
     imageUrls: string[];
     lastUpdated: Date;
-    bookings: BookingType[];
   };
   
   export type BookingType = {
