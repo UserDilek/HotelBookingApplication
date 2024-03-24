@@ -5,6 +5,7 @@ import mongoose from 'mongoose';
 import userRoutes from './routes/user';
 import authRoutes from './routes/auth';
 import myHotelRoutes from './routes/my-hotels';
+import hotelRoutes from './routes/hotels';
 import cookieParser from 'cookie-parser';
 import {v2 as cloudinary} from 'cloudinary';
 import path = require('path');  
@@ -30,8 +31,13 @@ app.use(express.static(path.join(__dirname,"../../frontend/dist")));
 app.use("/api/auth" ,authRoutes);
 app.use("/api/users" ,userRoutes);
 app.use("/api/my-hotels" ,myHotelRoutes);
+app.use("/api/hotels" ,hotelRoutes);
 
+app.get("*", (req: Request, res: Response) => {
+    res.sendFile(path.join(__dirname, "../../frontend/dist/index.html"));
+  });
 
+  
 app.listen(7000, ()=>{
     console.log("applicaiton is listening port 7000 : localhost:7000");
 })  
