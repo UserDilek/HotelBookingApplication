@@ -1,4 +1,3 @@
-import { useQuery } from "react-query";
 import {Link} from "react-router-dom";
 
 const Home = () => {
@@ -6,13 +5,14 @@ const Home = () => {
 
   const firstHotels = ["hotel1.jpg","hotel2.jpg"];
   const secondHotels = ["hotel5.jpg","hotel6.jpg","hotel7.jpg","hotel8.jpg","hotel3.jpg","hotel4.jpg"];
-  const firstHotelMaps = firstHotels.map((hotelName, index) => {
+  const firstHotelMaps = firstHotels.map((hotelName) => {
     return (
         <Link  to={"/hotelview/2"}   className="relative cursor-pointer overflow-hidden rounded-md" >
         <div className="h-[300px]">
     <img
       src={hotelName}
       className="w-full h-full object-cover object-center"
+      alt="hotel"
     />
   </div>
 
@@ -25,13 +25,14 @@ const Home = () => {
     );
   });
 
-  const secondHotelMaps = secondHotels.map((hotelName, index) => {
+  const secondHotelMaps = secondHotels.map((hotelName) => {
     return (
         <Link  to={"/hotelview"}   className="relative cursor-pointer overflow-hidden rounded-md" >
         <div className="h-[300px]">
     <img
       src={hotelName}
       className="w-full h-full object-cover object-center"
+      alt="Hotel"
     />
   </div>
 
