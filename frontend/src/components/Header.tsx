@@ -8,7 +8,7 @@ const Header = () => {
       <div className="bg-mainColor py-6">
       <div className=" flex justify-between">
         <span className="text-xl text-white font-bold bg-white ml-5    ">
-          <Link to="/"><img className="w-70 h-70" src="../src/assets/images/white-logo.png"></img></Link>
+          <Link to="/"><img className="w-70 h-70" src="white-logo.png" alt="logo"></img></Link>
         </span>
         <span className="flex ">
           { isLogged ? ( <>

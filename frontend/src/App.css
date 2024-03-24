@@ -112,7 +112,7 @@ body{
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-image: url(../src/assets/images/Bench.png);
+  background-image: url(../public/Bench.png);
   background-repeat: no-repeat;
   background-size: 175px;
   background-position: right bottom;

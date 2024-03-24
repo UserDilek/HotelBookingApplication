@@ -1,6 +1,4 @@
 import '../styles.css'; 
-import banner from '../assets/images/banner.jpg';
-import guset from '../assets/images/guest.jpg';
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 import * as apiClient from "./../apiClient";
@@ -46,7 +44,7 @@ const HotelView = ()=>{
         </nav>
     
         <div className="container">
-            <img className="image" src={banner} alt="banner image" />
+            <img className="image" src="banner.jpg" alt="banner image" />
             <div className="overlay-text">{hotel.name}</div>
         </div>
     
@@ -97,7 +95,7 @@ const HotelView = ()=>{
     
         <div className="guest">
             <h1>Guest Room</h1>
-            <img className="guestRoom" src={guset} alt="Guest Room" />
+            <img className="guestRoom" src="guest.jpg" alt="Guest Room" />
         </div>
     
         <div className="reservation" style={{ marginTop: '20px' }}>

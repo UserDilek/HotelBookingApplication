@@ -1,41 +1,18 @@
-import { useForm } from "react-hook-form";
 import DatePicker from "react-datepicker";
 import { useAppContext } from "../../contexts/AppContext";
-import { useLocation, useNavigate } from "react-router-dom";
 
 type Props = {
   hotelId: string;
   pricePerNight: number;
 };
 
-type GuestInfoFormData = {
-  checkIn: Date;
-  checkOut: Date;
-  adultCount: number;
-  childCount: number;
-};
 
-const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {  
+const GuestInfoForm = ({  pricePerNight }: Props) => {  
   const {isLogged} = useAppContext();
-  const navigate = useNavigate();
-  const location = useLocation();
-
-  
   const minDate = new Date();
   const maxDate = new Date();
   maxDate.setFullYear(maxDate.getFullYear() + 1);
-
-  const onSignInClick = (data: GuestInfoFormData) => {
-
-    navigate("/sign-in", { state: { from: location } });
-  };
-
-  const onSubmit =  (data: GuestInfoFormData) => {
-
-    navigate(`/hotel/${hotelId}/booking`);  
-  };
-
-
+  
   return (
     <div className="flex flex-col p-4 bg-blue-200 gap-4">
       <h3 className="text-md font-bold">${pricePerNight}</h3>
@@ -58,7 +35,7 @@ const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
             <DatePicker
               required
               selected={maxDate}
-              onChange={(date) => {}}
+              onChange={() => {}}
               selectsStart
               minDate={minDate}
               maxDate={maxDate}
