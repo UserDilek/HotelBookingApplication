@@ -75,10 +75,10 @@ const mutation = useMutation(apiClient.signIn, {
                 <p className="text-red m-3"  >{"*" + errors.password.message}</p>
                )}
 
-            <input type="submit" value="Sign up" className="btn"></input>
+            <input type="submit" value="Sign In" className="btn"></input>
         </form>
     
-        <p className="btm">Already have not an account  <Link to="/register">Signin</Link></p>
+        <p className="btm">Already have not an account  <Link to="/register">Sign Up</Link></p>
     </div>
 </div>
   )
