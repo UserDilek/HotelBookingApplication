@@ -21,10 +21,10 @@ const Footer = () => {
 
       
      
-      <BiLogoFacebookCircle style={style}/>
-      <BiLogoInstagramAlt style={style}/>
-      <BiLogoTwitter style={style}/>
-      <BiLogoYoutube style={style}/>
+      <BiLogoFacebookCircle data-testid="facebook-icon" style={style} />
+        <BiLogoInstagramAlt data-testid="instagram-icon" style={style} />
+        <BiLogoTwitter data-testid="twitter-icon" style={style} />
+        <BiLogoYoutube data-testid="youtube-icon" style={style} />
 
     
       </div>
