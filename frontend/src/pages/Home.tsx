@@ -1,69 +1,79 @@
-import {Link} from "react-router-dom";
-
-const Home = () => {
 
 
-  const firstHotels = ["hotel1.jpg","hotel2.jpg"];
-  const secondHotels = ["hotel5.jpg","hotel6.jpg","hotel7.jpg","hotel8.jpg","hotel3.jpg","hotel4.jpg"];
-  const firstHotelMaps = firstHotels.map((hotelName) => {
-    return (
-        <Link  to={"/hotelview/2"}   className="relative cursor-pointer overflow-hidden rounded-md" >
-        <div className="h-[300px]">
-    <img
-      src={hotelName}
-      className="w-full h-full object-cover object-center"
-      alt="hotel"
-    />
-  </div>
-
-  <div className="absolute bottom-0 p-4 bg-black bg-opacity-50 w-full rounded-b-md">
-    <span className="text-white font-bold tracking-tight text-3xl">
-       Lorem.
-    </span>
-  </div>
-      </Link>
-    );
-  });
-
-  const secondHotelMaps = secondHotels.map((hotelName) => {
-    return (
-        <Link  to={"/hotelview"}   className="relative cursor-pointer overflow-hidden rounded-md" >
-        <div className="h-[300px]">
-    <img
-      src={hotelName}
-      className="w-full h-full object-cover object-center"
-      alt="Hotel"
-    />
-  </div>
-
-  <div className="absolute bottom-0 p-4 bg-black bg-opacity-50 w-full rounded-b-md">
-    <span className="text-white font-bold tracking-tight text-3xl">
-       Lorem.
-    </span>
-  </div>
-      </Link>
-    );
-  });
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import '../HotelList.css'
 
 
+interface Hotel {
+  _id: string;
+  userId: string;
+  name: string;
+  city: string;
+  country: string;
+  description: string;
+  type: string;
+  adultCount: number;
+  childCount: number;
+  facilities: string[];
+  pricePerNight: number;
+  starRating: number;
+  imageUrls: string[];
+  lastUpdated: Date;
+}
 
-  return (     
-      < div className="container mx-auto">
-    <div className="space-y-3">
-      <h2 className="text-3xl font-bold">Latest Destinations</h2>
-      <p>Most recent desinations added by our hosts</p>
-      <div className="grid gap-4">
-        <div className="grid md:grid-cols-2 grid-cols-1 gap-4">
-        
-          {firstHotelMaps}
-    
-        </div>
-        <div className="grid md:grid-cols-3 gap-4">
-           {secondHotelMaps}
-        </div>
+const Home: React.FC = () => {
+  const [hotels, setHotels] = useState<Hotel[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string>('');
+
+  useEffect(() => {
+    const fetchHotels = async () => {
+      try {
+        const response = await axios.get('http://localhost:7000/api/my-hotels/hotels');
+        setHotels(response.data);
+      } catch (error) {
+        setError('Error fetching hotels');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchHotels();
+  }, []);
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>{error}</div>;
+
+  return (
+    <>
+    <div className="hotel-list-container">
+      <h1 className="hotel-list-title">Hotel List</h1>
+      <div className="hotels">
+        {hotels.map(hotel => (
+          <div key={hotel._id} className="hotel-card">
+            <img src={hotel.imageUrls[0]} alt={hotel.name} className="hotel-image" />
+            <div className="hotel-details">
+              <h2 className="hotel-name">{hotel.name}</h2>
+              <p className="hotel-location">
+                <strong>Location:</strong> {hotel.city}, {hotel.country}
+              </p>
+              <p className="hotel-description">{hotel.description}</p>
+              <p className="hotel-price">
+                <strong>Price per Night:</strong> ${hotel.pricePerNight}
+              </p>
+              <p className="hotel-rating">
+                <strong>Star Rating:</strong> {hotel.starRating}
+              </p>
+              <p className="hotel-facilities">
+                <strong>Facilities:</strong> {hotel.facilities.join(', ')}
+              </p>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
-    </div>
+    </>
   );
 };
 
