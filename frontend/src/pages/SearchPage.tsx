@@ -2,6 +2,10 @@ import { useEffect, useState } from "react";
 import axios from "../../node_modules/axios/index";
 import { hotelTypes, hotelFacilities } from "./../config/hotel-options-config";
 import { Link, useLocation } from "react-router-dom";
+<<<<<<< Updated upstream
+=======
+import Pagination from "../components/Pagination";
+>>>>>>> Stashed changes
 
 interface Hotel {
     _id: string;
@@ -20,6 +24,15 @@ interface Hotel {
     lastUpdated: Date;
 }
 
+<<<<<<< Updated upstream
+=======
+interface PaginationIF {
+    page: number;
+    pages: number;
+    total: number;
+}
+
+>>>>>>> Stashed changes
 const SearchPage = () => {
     const RATING_STARS = [5, 4, 3, 2, 1];
     const PRICES = [50, 100, 200, 300, 500];
@@ -29,13 +42,25 @@ const SearchPage = () => {
         { value: "pricePerNightDesc", label: "Price High to Low" },
     ]
 
+<<<<<<< Updated upstream
     const [total, setTotal] = useState(0);
+=======
+    const [pagination, setPagination] = useState<PaginationIF>({
+        page: 1,
+        pages: 0,
+        total: 0
+    });
+>>>>>>> Stashed changes
 
     const [hotels, setHotels] = useState<Hotel[]>([]);
     const [facilities, setFacilities] = useState<string[]>([]);
     const [types, setTypes] = useState<string[]>([]);
     const [stars, setStars] = useState<string[]>([]);
     const [maxPrice, setMaxPrice] = useState();
+<<<<<<< Updated upstream
+=======
+    const [currentPage, setCurrentPage] = useState(1);
+>>>>>>> Stashed changes
     const [sortOption, setSortOption] = useState("starRating");
     const location = useLocation();
     const query = new URLSearchParams(location.search);
@@ -54,7 +79,11 @@ const SearchPage = () => {
                 destination,
                 adultCount,
                 childCount,
+<<<<<<< Updated upstream
                 page: 1,
+=======
+                page: currentPage,
+>>>>>>> Stashed changes
             };
             if (facilities && facilities.length > 0) queryParams.facilities = facilities;
             if (types && types.length > 0) queryParams.types = types;
@@ -65,7 +94,11 @@ const SearchPage = () => {
             const response = await axios.get('http://localhost:7000/api/hotels/search', {
                 params: queryParams,
             });
+<<<<<<< Updated upstream
             setTotal(response?.data?.pagination?.total);
+=======
+            setPagination(response?.data?.pagination);
+>>>>>>> Stashed changes
             setHotels(response.data.data);
         } catch (error) {
             setError('Error fetching hotels');
@@ -77,7 +110,11 @@ const SearchPage = () => {
 
     useEffect(() => {
         fetchData();
+<<<<<<< Updated upstream
     }, [facilities, types, stars, maxPrice, sortOption]);
+=======
+    }, [facilities, types, stars, maxPrice, sortOption, pagination]);
+>>>>>>> Stashed changes
 
     if (loading) return <div>Loading...</div>;
     if (error) return <div>{error}</div>;
@@ -123,7 +160,11 @@ const SearchPage = () => {
                     {RATING_STARS.map((item) =>
                         <div key={item} className="form-group">
                             <input type="checkbox" value={item} className="me-2"
+<<<<<<< Updated upstream
                                 onChange={() => handleFilter("stars", item+"")}
+=======
+                                onChange={() => handleFilter("stars", item + "")}
+>>>>>>> Stashed changes
                                 checked={stars.includes(item + "")} />
                             {item} Stars
                         </div>)}
@@ -159,7 +200,11 @@ const SearchPage = () => {
                 </div>
                 <div className="flex-1 p-4">
                     <div>
+<<<<<<< Updated upstream
                         <h2>{total} Hotels Found</h2>
+=======
+                        <h2>{pagination.total} Hotels Found</h2>
+>>>>>>> Stashed changes
                         <div className="flex mt-4 mb-3">
                             <label className="min-w-[80px]">Sort by</label>
                             <select className="form-select"
@@ -193,6 +238,15 @@ const SearchPage = () => {
                             </div>
                         </div>
                     ))}
+<<<<<<< Updated upstream
+=======
+
+                    <Pagination
+                        currentPage={pagination?.page} totalPages={pagination?.total % 5 !== 0 ? (pagination?.total / 5) + 1 : pagination?.total / 5}
+                        onPageClick={({ page }) => 
+                            setCurrentPage(page)
+                        } />
+>>>>>>> Stashed changes
                 </div>
             </div>
         </>
