@@ -5,7 +5,8 @@ export default {
     extend: {
       colors :{
         mainColor: {
-          DEFAULT: "#88BDBC",
+        //  DEFAULT: "#88BDBC",
+          DEFAULT: "#1a237e",
         },
         red:{
           DEFAULT:"#FF5733"

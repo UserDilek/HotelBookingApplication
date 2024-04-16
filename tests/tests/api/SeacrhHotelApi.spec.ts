@@ -7,7 +7,7 @@ test.describe.parallel("Search Api test",() =>{
     test("Search Api test - Assert Response Status",async({request})=>{
       const response = await request.get(`${baseUrl}/search`)
       expect(response.status()).toBe(200);
-      console.log("dilek1");
+     
     })
 
     test("Search Api test - Assert Response Status Array",async({request})=>{
