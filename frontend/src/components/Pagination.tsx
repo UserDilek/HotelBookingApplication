@@ -1,32 +1,27 @@
-interface Pagination {
-    currentPage: number;
-    totalPages: number;
-    onPageClick: any;
-}
-
-const Pagination = ({ currentPage, totalPages, onPageClick }: Pagination) => {
-
+export type Props = {
+    page: number;
+    pages: number;
+    onPageChange: (page: number) => void;
+  };
+  
+  const Pagination = ({ page, pages, onPageChange }: Props) => {
+    const pageNumbers = [];
+    for (let i = 1; i <= pages; i++) {
+      pageNumbers.push(i);
+    }
+  
     return (
-        <div className="p-3 m-2 justify-items-center">
-            <div className="container mx-auto flex gap-2">
-                {currentPage !== 1 && <button
-                    onClick={() => onPageClick({ page: currentPage - 1 })}
-                    className="bg-mainColor p-2 rounded-md text-white">
-                    {currentPage - 1}
-                </button>}
-                <button
-                    onClick={() => onPageClick({ page: currentPage })}
-                    className="bg-mainColor p-2 rounded-md text-white">
-                    {currentPage}
-                </button>
-                {(totalPages >= currentPage + 1) && <button
-                    onClick={() => onPageClick({ page: currentPage + 1 })}
-                    className="bg-mainColor p-2 rounded-md text-white">
-                    {currentPage + 1}
-                </button>}
-            </div>
-        </div>
+      <div className="flex justify-center">
+        <ul className="flex border border-slate-300">
+          {pageNumbers.map((number) => (
+            <li className={`px-2 py-1 ${page === number ? "bg-gray-200" : ""}`}>
+              <button onClick={() => onPageChange(number)}>{number}</button>
+            </li>
+          ))}
+        </ul>
+      </div>
     );
-};
+  };
+  
+  export default Pagination;
 
-export default Pagination;

@@ -41,7 +41,6 @@ router.post("/", auth_1.default, [
         .isArray()
         .withMessage("Facilities are required"),
 ], upload.array("imageFiles", 6), (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log("backend tarafına geldim");
     try {
         const imageFiles = req.files;
         const newHotel = req.body;

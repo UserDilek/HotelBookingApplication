@@ -11,6 +11,7 @@ const user_1 = __importDefault(require("./routes/user"));
 const auth_1 = __importDefault(require("./routes/auth"));
 const my_hotels_1 = __importDefault(require("./routes/my-hotels"));
 const hotels_1 = __importDefault(require("./routes/hotels"));
+const my_booking_1 = __importDefault(require("./routes/my-booking"));
 const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const cloudinary_1 = require("cloudinary");
 const path = require("path");
@@ -33,6 +34,7 @@ app.use("/api/auth", auth_1.default);
 app.use("/api/users", user_1.default);
 app.use("/api/my-hotels", my_hotels_1.default);
 app.use("/api/hotels", hotels_1.default);
+app.use("/api/my-bookings", my_booking_1.default);
 app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "../../frontend/dist/index.html"));
 });

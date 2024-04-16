@@ -10,16 +10,12 @@ import GuestInfoForm from "../forms/GuestInfoForm/GuestInfoForm";
 const HotelView = ()=>{
 
     const { hotelId } = useParams();
-
-
+ 
     const { data: hotel } = useQuery(
       "fetchHotelById",
-      () => apiClient.fetchMyHotelById(hotelId || ""),
-      {
-        enabled: !!hotelId,
-      }
+      () => apiClient.fetchHotelById(hotelId || "")
     );
-    
+
    
     if (!hotel) {
       return <></>;
@@ -44,7 +40,7 @@ const HotelView = ()=>{
         </nav>
     
         <div className="container">
-            <img className="image" src="banner.jpg" alt="banner image" />
+            <img className="image" src={hotel.imageUrls[0]} alt="banner image" />
             <div className="overlay-text">{hotel.name}</div>
         </div>
     
@@ -128,7 +124,7 @@ const HotelView = ()=>{
             </div>
             <div className="reservation-container">
             <GuestInfoForm  pricePerNight={hotel.pricePerNight}
-            hotelId={hotel._id}/>
+                 hotelId={hotel._id}/>
             </div>
         </div>
     

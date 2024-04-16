@@ -1,17 +1,40 @@
-import DatePicker from "react-datepicker";
+import { FormEvent, useState } from "react";
+import { useSearchContext } from "../contexts/SearchContext";
 import { MdTravelExplore } from "react-icons/md";
+import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-const searchBar = () => {
-  const [destination, setDestination] = useState("");
-  const [adultCount, setAdultCount] = useState(1);
-  const [childCount, setChildCount] = useState(0);
+const searchBar = ()=>{
 
-  return (
-    <div className="container mx-auto">
-      <form
+  const navigate = useNavigate();
+  const search = useSearchContext();
+
+  const [destination, setDestination] = useState<string>(search.destination);
+  const [checkIn, setCheckIn] = useState<Date>(search.checkIn);
+  const [checkOut, setCheckOut] = useState<Date>(search.checkOut);
+  const [adultCount, setAdultCount] = useState<number>(search.adultCount);
+  const [childCount, setChildCount] = useState<number>(search.childCount);
+
+  const handleSubmit = (event: FormEvent) => {
+    event.preventDefault();
+    search.saveSearchValues(
+      destination,
+      checkIn,
+      checkOut,
+      adultCount,
+      childCount
+    );
+    navigate("/search");
+  };
+
+  const minDate = new Date();
+  const maxDate = new Date();
+  maxDate.setFullYear(maxDate.getFullYear() + 1);
+
+    return (
+        <div className="container mx-auto">
+  <form  onSubmit={handleSubmit}
         className="-mt-8 p-3 bg-orange-400 rounded shadow-md grid grid-cols-2 lg:grid-cols-3 2xl:grid-cols-5 items-center gap-4"
       >
         <div className="flex flex-row items-center flex-1 bg-white p-2">
@@ -20,10 +43,10 @@ const searchBar = () => {
             placeholder="Where are you going?"
             className="text-md w-full focus:outline-none"
             value={destination}
-            onChange={(e) => setDestination(e.target.value)}
+            onChange={(event) => setDestination(event.target.value)}
           />
         </div>
-
+  
         <div className="flex bg-white px-2 py-1 gap-2">
           <label className="items-center flex">
             Adults:
@@ -33,7 +56,7 @@ const searchBar = () => {
               min={1}
               max={20}
               value={adultCount}
-              onChange={(e) => setAdultCount(parseInt(e.target.value))}
+              onChange={(event) => setAdultCount(parseInt(event.target.value))}
             />
           </label>
           <label className="items-center flex">
@@ -44,51 +67,52 @@ const searchBar = () => {
               min={0}
               max={20}
               value={childCount}
-              onChange={(e) => setChildCount(parseInt(e.target.value))}
+              onChange={(event) => setChildCount(parseInt(event.target.value))}
             />
           </label>
         </div>
         <div>
-          <div>
-            <DatePicker
-              selectsStart
-              placeholderText="Check-In Date"
-              className="min-w-full bg-white p-2 focus:outline-none"
-              wrapperClassName="min-w-full"
-              onChange={() => { }}
-            />
-          </div>
+        <div>
+          <DatePicker
+           selected={checkIn}
+           onChange={(date) => setCheckIn(date as Date)}
+            selectsStart
+            startDate={checkIn}
+            endDate={checkOut}
+            minDate={minDate}
+            maxDate={maxDate}
+            placeholderText="Check-In Date"
+            className="min-w-full bg-white p-2 focus:outline-none"
+            wrapperClassName="min-w-full" 
+          />
+        </div>
         </div>
         <div>
           <DatePicker
+            selected={checkOut}
+            onChange={(date) => setCheckOut(date as Date)}
             selectsStart
+            startDate={checkIn}
+            endDate={checkOut}
+            minDate={minDate}
+            maxDate={maxDate}
             placeholderText="Check-out Date"
             className="min-w-full bg-white p-2 focus:outline-none"
-            wrapperClassName="min-w-full"
-            onChange={() => { }}
+            wrapperClassName="min-w-full" 
           />
         </div>
         <div className="flex gap-1">
-          <Link
-            to={`/search?destination=${destination}&adultCount=${adultCount}&childCount=${childCount}`}
-            className="w-2/3 bg-blue-600 text-white h-full p-2 font-bold text-xl hover:bg-blue-500"
-          >
+          <button className="w-2/3 bg-blue-600 text-white h-full p-2 font-bold text-xl hover:bg-blue-500">
             Search
-          </Link>
-          <button
-            onClick={() => {
-              setDestination("");
-              setAdultCount(1);
-              setChildCount(0);
-            }}
-            className="w-1/3 bg-red-600 text-white h-full p-2 font-bold text-xl hover:bg-red-500">
+          </button>
+          <button className="w-1/3 bg-red-600 text-white h-full p-2 font-bold text-xl hover:bg-red-500">
             Clear
           </button>
         </div>
       </form>
-    </div>
-
-  );
+        </div>
+      
+    );
 }
 
 export default searchBar;
