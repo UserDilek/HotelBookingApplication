@@ -32,17 +32,3 @@ return (
 };
 
 export default Home;         
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
-
-
-

@@ -74,9 +74,9 @@ const HotelForm = ({ label, handleFormSubmit }: HotelFormInterface) => {
         <div className="p-5 w-full">
             <form onSubmit={onSubmit} className="max-w-[850px] mx-auto text-start">
                 <h1 className="text-4xl mb-5 text-[#88BDBC] mt-5">{label}</h1>
-                <label className="text-[#88BDBC] m-3">Name</label>
+                <label htmlFor="Name" className="text-[#88BDBC] m-3">Name</label>
                 <div className="input-block mb-4 mt-1">
-                    <input type="text" placeholder="Enter hotel name" className="w-full"
+                    <input id="Name" type="text" placeholder="Enter hotel name" className="w-full"
                         {...register("name", { required: "Please enter hotel name." })} ></input>
                 </div>
                 {errors.name && (
@@ -85,9 +85,9 @@ const HotelForm = ({ label, handleFormSubmit }: HotelFormInterface) => {
 
                 <div className="flex items-center gap-4">
                     <div className="flex-1">
-                        <label className="text-[#88BDBC] m-3">City</label>
+                        <label htmlFor="City" className="text-[#88BDBC] m-3">City</label>
                         <div className="input-block mb-4 mt-1">
-                            <input type="text" placeholder="Enter hotel city" className="w-full"
+                            <input id="City" type="text" placeholder="Enter hotel city" className="w-full"
                                 {...register("address.city", { required: "Please enter hotel city." })} ></input>
                         </div>
                         {errors?.address?.city && (
@@ -95,9 +95,9 @@ const HotelForm = ({ label, handleFormSubmit }: HotelFormInterface) => {
                         )}
                     </div>
                     <div className="flex-1">
-                        <label className="text-[#88BDBC] m-3">Country</label>
+                        <label htmlFor="Country" className="text-[#88BDBC] m-3">Country</label>
                         <div className="input-block mb-4 mt-1">
-                            <input type="text" placeholder="Enter hotel country" className="w-full"
+                            <input id="Country" type="text" placeholder="Enter hotel country" className="w-full"
                                 {...register("address.country", { required: "Please enter hotel country." })} ></input>
                         </div>
                         {errors.address?.country && (
@@ -106,10 +106,10 @@ const HotelForm = ({ label, handleFormSubmit }: HotelFormInterface) => {
                     </div>
                 </div>
 
-                <label className="text-[#88BDBC] m-3">Description</label>
+                <label htmlFor="Description" className="text-[#88BDBC] m-3">Description</label>
                 <div className="input-block mb-4 mt-1">
 
-                    <input type="text" placeholder="Enter hotel descripiton" className="w-full"
+                    <input id="Description" type="text" placeholder="Enter hotel descripiton" className="w-full"
                         {...register("description", { required: "Please enter hotel description." })} ></input>
                 </div>
                 {errors.description && (
@@ -118,9 +118,9 @@ const HotelForm = ({ label, handleFormSubmit }: HotelFormInterface) => {
 
                 <div className="flex items-center gap-4">
                     <div className="flex-1">
-                        <label className="text-[#88BDBC] m-3">Price</label>
+                        <label htmlFor="Price" className="text-[#88BDBC] m-3">Price</label>
                         <div className="input-block mb-4 mt-1">
-                            <input type="number" placeholder="Enter hotel price" className="w-full"
+                            <input id="Price" type="number" placeholder="Enter hotel price" className="w-full"
                                 {...register("pricePerNight", { required: "Please enter hotel price." })} ></input>
                         </div>
                         {errors.pricePerNight && (
@@ -129,9 +129,9 @@ const HotelForm = ({ label, handleFormSubmit }: HotelFormInterface) => {
                     </div>
 
                     <div className="flex-1">
-                        <label className="text-[#88BDBC] m-3">Rating</label>
+                        <label htmlFor="Rating" className="text-[#88BDBC] m-3">Rating</label>
                         <div className="input-block mb-4 mt-1">
-                            <select className="w-full"
+                            <select id="Rating" className="w-full"
                                 {...register("rating", { required: "Please select hotel rating." })} >
                                 <option value="">Select rating</option>
                                 <option value="1">1</option>
@@ -148,8 +148,8 @@ const HotelForm = ({ label, handleFormSubmit }: HotelFormInterface) => {
                 </div>
 
                 <div className="mb-4 mt-1">
-                    <label className="text-[#88BDBC] m-3">Type</label>
-                    <div className="flex flex-wrap gap-4 mt-1">
+                    <label htmlFor="Type" className="text-[#88BDBC] m-3">Type</label>
+                    <div id="Type" className="flex flex-wrap gap-4 mt-1">
                         {typeOptions.map(({ label, value }, index) =>
                             <SelectTag key={index} label={label} value={value} isSelected={type.indexOf(value) !== -1} onClick={handleSelected} />
 
@@ -159,8 +159,8 @@ const HotelForm = ({ label, handleFormSubmit }: HotelFormInterface) => {
                 </div>
 
                 <div className="mb-4 mt-1">
-                    <label className="text-[#88BDBC] m-3">Facilities</label>
-                    <div className="flex flex-wrap gap-4 mt-1">
+                    <label htmlFor="facilities" className="text-[#88BDBC] m-3">Facilities</label>
+                    <div id="facilities" className="flex flex-wrap gap-4 mt-1">
                         {facilitiyOptions.map(({ label, value }, index) =>
                             <SelectTag key={index} label={label} value={value} isSelected={facilities.indexOf(value) !== -1} onClick={handleFacilitySelected} />
                         )}
@@ -170,9 +170,9 @@ const HotelForm = ({ label, handleFormSubmit }: HotelFormInterface) => {
                 <label className="text-[#88BDBC] m-3">Guests</label>
                 <div className="flex items-center gap-4 p-5 pb-2 bg-[#efefef] rounded-lg mb-4 mt-1">
                     <div className="flex-1">
-                        <label className="text-[#88BDBC] m-3">Adults</label>
+                        <label htmlFor="Adults" className="text-[#88BDBC] m-3">Adults</label>
                         <div className="input-block bg-white mb-4 mt-1">
-                            <input type="number" placeholder="Enter hotel adult capacity" className="w-full"
+                            <input id="Adults" type="number" placeholder="Enter hotel adult capacity" className="w-full"
                                 {...register("adultCount", { required: "Please enter hotel adult capacity." })} ></input>
                         </div>
                         {errors.adultCount && (
@@ -180,9 +180,9 @@ const HotelForm = ({ label, handleFormSubmit }: HotelFormInterface) => {
                         )}
                     </div>
                     <div className="flex-1">
-                        <label className="text-[#88BDBC] m-3">Child</label>
+                        <label htmlFor="Child" className="text-[#88BDBC] m-3">Child</label>
                         <div className="input-block bg-white mb-4 mt-1">
-                            <input type="number" placeholder="Enter hotel child capacity" className="w-full"
+                            <input id="Child" type="number" placeholder="Enter hotel child capacity" className="w-full"
                                 {...register("childCount", { required: "Please enter hotel child capacity." })} ></input>
                         </div>
                         {errors.childCount && (
@@ -191,7 +191,7 @@ const HotelForm = ({ label, handleFormSubmit }: HotelFormInterface) => {
                     </div>
                 </div>
 
-                <label className="text-[#88BDBC] m-3">Images</label>
+                <label htmlFor="Images" className="text-[#88BDBC] m-3">Images</label>
                 <div className="input-block mb-4 mt-1">
                     <label
                         htmlFor="fileInput"

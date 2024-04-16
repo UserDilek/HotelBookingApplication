@@ -24,3 +24,4 @@ export type Props = {
   };
   
   export default Pagination;
+

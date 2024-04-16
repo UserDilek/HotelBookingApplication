@@ -42,7 +42,6 @@ const App = () =>{
       <Route path='/register' element={<Register></Register>}/>  
       <Route path='/hotelview/:hotelId' element={<Layout><HotelView/></Layout> }/>
       <Route  path="/search" element={<Layout><Search/></Layout> } />
-
       <Route path="*" element={<Navigate to="/" />} />
       
       {isLogged && (

@@ -58,7 +58,14 @@ router.post(
   }
 );
 
-
+router.get("/hotels",  async (req: Request, res: Response) => {
+  try {
+    const hotels = await Hotel.find({});
+    res.json(hotels);
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching hotels" });
+  }
+});
 router.delete("/:hotelId", verifyToken, async (req: Request, res: Response) => {
   const hotelId = req.params.hotelId.toString();
   try {
@@ -72,7 +79,7 @@ router.delete("/:hotelId", verifyToken, async (req: Request, res: Response) => {
   }
 
 
-    
+  
   
 })
 router.get("/", verifyToken, async (req: Request, res: Response) => {
