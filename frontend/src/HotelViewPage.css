@@ -1,0 +1,55 @@
+.hotel-details-container {
+  margin: 0 auto;
+  padding: 20px;
+  
+}
+
+.book-button{
+  background-color: #66a3d1;
+  color: white;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 20px;
+}
+
+.hotel-details-title {
+
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #333;
+  font-weight: bolder;
+}
+
+.hotel-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-content: center;
+  align-items: center;
+  text-align: start;
+}
+
+.hotel-image {
+  width: 90% !important; /* Take 100% width */
+  height: 100%; /* Maintain aspect ratio */
+  border-radius: 10px 10px 0 0; /* Rounded corners, only at the top */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin: auto;
+}
+
+.hotel-info {
+  width: 100%;
+  padding: 20px;
+  border-radius: 0 0 10px 10px; /* Rounded corners, only at the bottom */
+}
+
+.hotel-info p {
+  margin: 0 0 10px;
+  color: black;
+}
+
+@media screen and (max-width: 600px){
+  .hotel-details{
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr;
+  }
+}

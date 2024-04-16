@@ -1,25 +1,11 @@
-
-
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import '../HotelList.css'
-
+import '../HotelList.css';
 
 interface Hotel {
   _id: string;
-  userId: string;
   name: string;
-  city: string;
-  country: string;
-  description: string;
-  type: string;
-  adultCount: number;
-  childCount: number;
-  facilities: string[];
-  pricePerNight: number;
-  starRating: number;
   imageUrls: string[];
-  lastUpdated: Date;
 }
 
 const Home: React.FC = () => {
@@ -46,34 +32,21 @@ const Home: React.FC = () => {
   if (error) return <div>{error}</div>;
 
   return (
-    <>
     <div className="hotel-list-container">
       <h1 className="hotel-list-title">Hotel List</h1>
       <div className="hotels">
         {hotels.map(hotel => (
           <div key={hotel._id} className="hotel-card">
-            <img src={hotel.imageUrls[0]} alt={hotel.name} className="hotel-image" />
-            <div className="hotel-details">
-              <h2 className="hotel-name">{hotel.name}</h2>
-              <p className="hotel-location">
-                <strong>Location:</strong> {hotel.city}, {hotel.country}
-              </p>
-              <p className="hotel-description">{hotel.description}</p>
-              <p className="hotel-price">
-                <strong>Price per Night:</strong> ${hotel.pricePerNight}
-              </p>
-              <p className="hotel-rating">
-                <strong>Star Rating:</strong> {hotel.starRating}
-              </p>
-              <p className="hotel-facilities">
-                <strong>Facilities:</strong> {hotel.facilities.join(', ')}
-              </p>
-            </div>
+            <a href={`/hotel-details/${hotel._id}`}>
+              <div className="hotel-image-container">
+                <img src={hotel.imageUrls[0]} alt={hotel.name} className="hotel-image" />
+                <div className="hotel-name-overlay">{hotel.name}</div>
+              </div>
+            </a>
           </div>
         ))}
       </div>
     </div>
-    </>
   );
 };
 
